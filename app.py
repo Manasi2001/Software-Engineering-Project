@@ -249,28 +249,27 @@ if selected == 'Kids Space':
 
 if selected == 'Notes':
     st.title('Notes')
-    if st.button("Add"):
-      audio_bytes = audio_recorder(text="Click to record", icon_size="0.5x", pause_threshold=10.0)
-      try:
-        if audio_bytes:
-          st.audio(audio_bytes, format="audio/wav")
-          
-          apiUrl = "https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/5f9e33da-3d8f-4924-9b18-2ef9c3dd288d"
-          myKey = "7NwfZMJOeoVniUj5-XIFYclesdc0VjHzkPZPDBigsD8Y"
-      
-          auth = IAMAuthenticator(myKey)
-          Speech2Text = SpeechToTextV1(authenticator = auth)
-          Speech2Text.set_service_url(apiUrl)
-      
-          response = Speech2Text.recognize(audio = audio_bytes, content_type = "audio/wav")
-          recognized_text = response.result['results'][0]['alternatives'][0]['transcript']
-          st.markdown(" ")
-          st.markdown("*Content Recognized*")
-          st.info(recognized_text)
-      
-          st.markdown(" ")
-          time.sleep(2)
-          st.success('Note Saved!')
-      except:
-        st.error('Try recording again.')
+    st.markdown('*Click the icon to add new note.*')
+    audio_bytes = audio_recorder(text="", pause_threshold=10.0)
+    try:
+      if audio_bytes:
+        st.audio(audio_bytes, format="audio/wav")
+        
+        apiUrl = "https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/5f9e33da-3d8f-4924-9b18-2ef9c3dd288d"
+        myKey = "7NwfZMJOeoVniUj5-XIFYclesdc0VjHzkPZPDBigsD8Y"
     
+        auth = IAMAuthenticator(myKey)
+        Speech2Text = SpeechToTextV1(authenticator = auth)
+        Speech2Text.set_service_url(apiUrl)
+    
+        response = Speech2Text.recognize(audio = audio_bytes, content_type = "audio/wav")
+        recognized_text = response.result['results'][0]['alternatives'][0]['transcript']
+        st.markdown(" ")
+        st.markdown("*Content Recognized*")
+        st.info(recognized_text)
+    
+        st.markdown(" ")
+        time.sleep(2)
+        st.success('Note Saved!')
+    except:
+      st.error('Try recording again.')
