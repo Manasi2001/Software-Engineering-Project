@@ -250,7 +250,7 @@ if selected == 'Kids Space':
 if selected == 'Notes':
     st.title('Notes')
     st.markdown('*Click the icon to add new note.*')
-    c1, c2 = st.columns(2)
+    c1, c2, c3, c4, c5, c6, c7, c8 = st.columns(8)
     with c1:
       audio_bytes = audio_recorder(text="", icon_size="0.5x", pause_threshold=10.0)
     try:
