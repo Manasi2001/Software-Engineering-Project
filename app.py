@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-# import sounddevice as sd
+from audio_recorder_streamlit import audio_recorder
 import wave
 import time
 
@@ -247,43 +247,30 @@ if selected == 'Kids Space':
     else:
         st.header("Kindly enter kid's name in the sidebar to continue.")
 
-def record_audio(filename, duration=5):
-    audio_data = sd.rec(int(44100 * duration), samplerate=44100, channels=1, dtype='int16')
-    sd.wait()
-
-    with wave.open(filename, 'wb') as wf:
-        wf.setnchannels(1)
-        wf.setsampwidth(2)
-        wf.setframerate(44100)
-        wf.writeframes(audio_data.tobytes())
-
 if selected == 'Notes':
     st.title('Notes')
-    if st.button("Add Voice Note"):
-        with st.spinner('Recording...'):
-            file_name = "audio.wav"
-            record_audio(file_name)
-        st.markdown(" ")
-        st.markdown('*Recording finished.*')
-        # st.audio(file_name, format="audio/wav")
-
-        # apiUrl = "https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/5f9e33da-3d8f-4924-9b18-2ef9c3dd288d"
-        # myKey = ""
-
-        # auth = IAMAuthenticator(myKey)
-        # Speech2Text = SpeechToTextV1(authenticator = auth)
-        # Speech2Text.set_service_url(apiUrl)
-
-        # with open("audio.wav", mode="rb") as wav:  
-
-        #     response = Speech2Text.recognize(audio=wav, content_type="audio/wav")
-        #     recognized_text = response.result['results'][0]['alternatives'][0]['transcript']
-        st.markdown(" ")                           # CI
-        st.markdown("*Content Recognized*")        # CI
-        # st.info(recognized_text)                 # CI
-        st.info('placeholder')                     # CI
-
-        st.markdown(" ")
-        time.sleep(2)
-        st.success('Note Saved!')
+    if st.button("Add"):
+      audio_bytes = audio_recorder(text="Click to record", icon_size="0.5x", pause_threshold=10.0)
+      try:
+        if audio_bytes:
+          st.audio(audio_bytes, format="audio/wav")
+          
+          apiUrl = "https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/5f9e33da-3d8f-4924-9b18-2ef9c3dd288d"
+          myKey = "7NwfZMJOeoVniUj5-XIFYclesdc0VjHzkPZPDBigsD8Y"
+      
+          auth = IAMAuthenticator(myKey)
+          Speech2Text = SpeechToTextV1(authenticator = auth)
+          Speech2Text.set_service_url(apiUrl)
+      
+          response = Speech2Text.recognize(audio = audio_bytes, content_type = "audio/wav")
+          recognized_text = response.result['results'][0]['alternatives'][0]['transcript']
+          st.markdown(" ")
+          st.markdown("*Content Recognized*")
+          st.info(recognized_text)
+      
+          st.markdown(" ")
+          time.sleep(2)
+          st.success('Note Saved!')
+      except:
+        st.error('Try recording again.')
     
