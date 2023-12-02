@@ -1,2 +1,3 @@
-# Software-Engineering-Project
-Healthy Buddy
+# Healthy Buddy
+
+### Try out the website here: 
