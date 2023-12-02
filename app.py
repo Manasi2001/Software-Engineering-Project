@@ -278,10 +278,10 @@ if selected == 'Notes':
 
         #     response = Speech2Text.recognize(audio=wav, content_type="audio/wav")
         #     recognized_text = response.result['results'][0]['alternatives'][0]['transcript']
-            st.markdown(" ")
-            st.markdown("*Content Recognized*")
-            # st.info(recognized_text)
-            st.info('placeholder')
+        st.markdown(" ")                           # CI
+        st.markdown("*Content Recognized*")        # CI
+        # st.info(recognized_text)                 # CI
+        st.info('placeholder')                     # CI
 
         st.markdown(" ")
         time.sleep(2)
