@@ -265,22 +265,23 @@ if selected == 'Notes':
             record_audio(file_name)
         st.markdown(" ")
         st.markdown('*Recording finished.*')
-        st.audio(file_name, format="audio/wav")
+        # st.audio(file_name, format="audio/wav")
 
-        apiUrl = "https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/5f9e33da-3d8f-4924-9b18-2ef9c3dd288d"
-        myKey = "7NwfZMJOeoVniUj5-XIFYclesdc0VjHzkPZPDBigsD8Y"
+        # apiUrl = "https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/5f9e33da-3d8f-4924-9b18-2ef9c3dd288d"
+        # myKey = ""
 
-        auth = IAMAuthenticator(myKey)
-        Speech2Text = SpeechToTextV1(authenticator = auth)
-        Speech2Text.set_service_url(apiUrl)
+        # auth = IAMAuthenticator(myKey)
+        # Speech2Text = SpeechToTextV1(authenticator = auth)
+        # Speech2Text.set_service_url(apiUrl)
 
-        with open("audio.wav", mode="rb") as wav:  
+        # with open("audio.wav", mode="rb") as wav:  
 
-            response = Speech2Text.recognize(audio=wav, content_type="audio/wav")
-            recognized_text = response.result['results'][0]['alternatives'][0]['transcript']
+        #     response = Speech2Text.recognize(audio=wav, content_type="audio/wav")
+        #     recognized_text = response.result['results'][0]['alternatives'][0]['transcript']
             st.markdown(" ")
             st.markdown("*Content Recognized*")
-            st.info(recognized_text)
+            # st.info(recognized_text)
+            st.info('placeholder')
 
         st.markdown(" ")
         time.sleep(2)
