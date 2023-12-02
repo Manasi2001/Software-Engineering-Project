@@ -258,7 +258,7 @@ if selected == 'Notes':
         st.audio(audio_bytes, format="audio/wav")
         
         apiUrl = "https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/5f9e33da-3d8f-4924-9b18-2ef9c3dd288d"
-        myKey = "7NwfZMJOeoVniUj5-XIFYclesdc0VjHzkPZPDBigsD8Y"
+        myKey = st.secrets["key"]
     
         auth = IAMAuthenticator(myKey)
         Speech2Text = SpeechToTextV1(authenticator = auth)
