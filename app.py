@@ -252,7 +252,7 @@ if selected == 'Notes':
     st.markdown('*Click the icon to add new note.*')
     c1, c2, c3, c4, c5, c6, c7, c8 = st.columns(8)
     with c1:
-      audio_bytes = audio_recorder(text="Speak", icon_size="0.5x", pause_threshold=10.0)
+      audio_bytes = audio_recorder(text="Record", icon_size="0.5x", pause_threshold=10.0)
     try:
       if audio_bytes:
         st.audio(audio_bytes, format="audio/wav")
